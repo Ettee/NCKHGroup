@@ -1,4 +1,5 @@
-﻿CREATE TABLE Khoa
+﻿-------------------------BANG KHOA------------------------------
+CREATE TABLE Khoa                                              
 (
 MaKhoa char(8) not null,
 TenKhoa char(20) not null,
@@ -7,7 +8,7 @@ NoiDungDaoTao char(200),
 GhiChu varchar ,
 primary key (MaKhoa)
 )
--------------------------------
+-------------------------BANG LOP------------------------------
 CREATE TABLE Lop
 (
 MaLop char(8) not null,
@@ -19,7 +20,7 @@ GhiChu varchar,
 Primary Key (MaLop),
 Foreign Key (MaKhoa) References Khoa(MaKhoa)
 )
--------------------------------
+-----------------------BANG MON HOC----------------------------
 CREATE TABLE MonHoc
 (
 MaMH int identity not null, 
@@ -32,7 +33,7 @@ GhiChu varchar,
 Primary Key (MaMH), 
 Foreign Key (MaKhoa) References Khoa(MaKhoa) 
 )
------------------------------
+----------------------BANG SINH VIEN---------------------------
 CREATE TABLE SinhVien
 (
 MaSV char(10) not null,
@@ -47,7 +48,7 @@ GhiChu varchar,
 Primary Key (MaSV),
 Foreign Key (MaLop) References Lop(MaLop)
 )
-----------------------------------
+-------------------------BANG HOC------------------------------
 CREATE TABLE Hoc
 (
 MaSV char(10), 
@@ -60,22 +61,22 @@ Primary Key (MaSV,MaMH,NgayDangKy),
 Foreign Key (MaSV) References SinhVien(MaSV), 
 Foreign Key (MaMH) References MonHoc(MaMH)
 )
------------------------------------
+--------------------------Cau 2--------------------------------
 Alter Table Hoc
 Add
 	Constraint chk_ngay
 	check(NgayDangKy<GETDATE())
------------------------------------
+--------------------------Cau 3--------------------------------
 Alter Table Hoc
 Add
 	Constraint chk_diem
 	check(DiemTrungBinh >= 0 AND DiemTrungBinh <= 10)
------------------------------------
+--------------------------Cau 4--------------------------------
 Alter Table MonHoc
 Add
 	Constraint chk_monhoc
 	Unique(TenMH);
------------------------------------
+--------------------------Cau 5--------------------------------
 GO
 CREATE VIEW DanhSachSV
 As
@@ -90,7 +91,7 @@ As
 					 Group by h.MaSV
 					 Having count(h.MaSV) > 2
 					)
-----------------------------DATA---------------------------------
+----------------------------DATA--------------------------------
 INSERT into dbo.Khoa
 (
     MaKhoa,
