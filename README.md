@@ -1,2 +1,2 @@
 # NCKHGroup
-nhóm luyện bi
+nhóm luyện giáo sư
